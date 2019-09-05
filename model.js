@@ -33,3 +33,26 @@ const createClaim = (name, amountClaim) => {
     }
   };
 };
+
+// Reducers (departaments in the analogy)
+const claimsHistory = (oldListOfClaims = [], action) => {
+  if (action.type === "CREATE_CLAIM") {
+    // we care about this action
+    return [oldListOfClaims, action.payload];
+  }
+
+  // we dont care about this action
+  return oldListOfClaims;
+};
+
+const accounting = (bagOfMoney = 100, action) => {
+  if (action.type === "CREATE_CLAIM") {
+    // we care about this action
+    return bagOfMoney - action.payload.amountClaim;
+  } else if (action.type === "CREATE_POLICY") {
+    // we care about
+    return bagOfMoney + action.payload.amount;
+  }
+  // we dont care about this action
+  return bagOfMoney;
+};
